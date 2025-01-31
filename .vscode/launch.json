@@ -25,99 +25,31 @@
         "env": {
                 "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"
             },
+      },
+      {
+        "name": "Debug BEVFusion testing",  // 配置名称，显示在 VSCode 调试选项中
+        "type": "debugpy",  // 调试类型为 Python
+        "python": "/home/student/miniconda3/envs/openmmlab/bin/python",
+        "request": "launch",
+        "module": "torch.distributed.launch",
+        "args": [
+          // 训练脚本的参数，等同于 bash 命令中的参数部分
+          "--nnodes=1",
+          "--node_rank=0",
+          "--master_addr=127.0.0.1",
+          "--nproc_per_node=1",
+          "--master_port=29500",
+          "./tools/test.py",
+          "./projects/BEVFusion/configs/bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d.py",
+          "--launcher=pytorch",
+          //"--cfg-options", 
+          "./checkpoints/bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d-5239b1af.pth",
+          
+        ],
+        "cwd": "/home/student/mmdetection3d",
+        "env": {
+                "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"
+            },
       }
     ]
   }
-//   // bash tools/dist_train.sh 
-//   // projects/BEVFusion/configs/bevfusion_lidar-cam_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d.py 
-//   // 1 
-//   // --cfg-options 
-//   // load_from=/home/student/mmdetection3d/checkpoints/bevfusion_lidar_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d-2628f933.pth 
-//   //  model.img_backbone.init_cfg.checkpoint=/home/student/mmdetection3d/checkpoints/swint-nuimages-pretrained.pth
-
-
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-
-
-// {
-//   "version": "0.2.0",
-//   "configurations": [
-//       {
-//           "name": "train Debug",
-//           "type": "debugpy",
-//           "python": "/home/student/miniconda3/envs/openmmlab/bin/python",
-//           "request": "launch",
-//           "module": "torch.distributed.launch",
-//           "args": [
-//               "--nproc_per_node=1",
-//               "--master_port=28400",
-//               "./tools/train.py",
-//               "./projects/configs/bevformer/bevformer_tiny.py",
-//               "--launcher=pytorch",
-//               "--deterministic",
-
-//           ],
-//           "cwd": "/home/gofuuu/BEVFormer",
-//           "env": {
-//               "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"
-//           },
-//           "console": "integratedTerminal",
-//           "stopOnEntry": false,
-//           "justMyCode": false,
-//           "purpose": ["debug-in-terminal"],
-//       }
-//       ,
-//       {
-//           "name": "Test Debug",
-//           "type": "debugpy",
-//           "python": "/home/gofuuu/miniconda3/envs/bevformer/bin/python",
-//           "request": "launch",
-//           "module": "torch.distributed.launch",
-//           "args": [
-//               "--nproc_per_node=1",
-//               "--master_port=29503",
-//               "./tools/test.py",
-//               "./projects/configs/bevformer/bevformer_tiny.py",
-//               "./work_dirs/bevformer_tiny/latest.pth",
-//               "--launcher",
-//               "pytorch",
-//               "--eval",
-//               "bbox",
-//           ],
-//           "cwd": "${workspaceFolder}",
-//           "env": {
-//               "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"
-//           },
-//           "console": "integratedTerminal",
-//           "stopOnEntry": false,
-//           "justMyCode": false,
-//           "purpose": ["debug-in-terminal"],
-//       }
-//       ,
-//       {
-//           "name": "data Debug",
-//           "type": "debugpy",
-//           "python": "/home/gofuuu/miniconda3/envs/bevformer/bin/python",
-//           "request": "launch",
-//           "module": "tools/create_data.p",
-//           "args": [
-//               "--root-path=./data/nuscenes",
-//               "--out-dir=./data_info",
-//               "--extra-tag=nuscenes",
-//               " --version=v1.0",
-//               "--canbus=./data",
-
-//           ],
-//           "cwd": "/home/gofuuu/BEVFormer",
-//           "env": {
-//               "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"
-//           },
-//           "console": "integratedTerminal",
-//           "stopOnEntry": false,
-//           "justMyCode": false,
-//           "purpose": ["debug-in-terminal"],
-//       }
-//   ]
-// } 
